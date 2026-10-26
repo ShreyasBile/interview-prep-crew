@@ -1,0 +1,11 @@
+# Local model for the crew: qwen3:4b-instruct (Qwen3-4B-Instruct-2507).
+# It supports tool calling and does not "think" before answering, which keeps each agent
+# step fast on CPU-only machines. num_ctx: Ollama's default of 4096 tokens is too small for
+# CrewAI's agent prompts (the largest prompt + answer is about 5K), while 16384 used enough
+# RAM on an 8 GB-free laptop for Ollama to run out of memory mid-answer.
+#   ollama create interview-prep-qwen3 -f ollama/Modelfile
+FROM qwen3:4b-instruct
+PARAMETER num_ctx 8192
+PARAMETER temperature 0.7
+PARAMETER top_p 0.8
+PARAMETER top_k 20
